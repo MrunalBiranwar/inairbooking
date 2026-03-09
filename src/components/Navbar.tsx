@@ -1,25 +1,27 @@
-import { useState} from "react";
+import { useState } from "react";
 import { Link } from "react-router";
+import { useNavigate } from "react-router-dom";
 import { Plane, ChevronDown, Menu, X, Globe, DollarSign } from "lucide-react";
 
 const navItems = [
   { label: "Flights", href: "/flights" },
   { label: "Hotels", href: "#" },
   { label: "Car Rentals", href: "#" },
- { label: "Deals", href: "/deals" },
-  { label: "Explore", href: "#" },
-  { label: "Help", href: "#" },
+  { label: "Deals", href: "/deals" },
+  { label: "Explore", href: "/explorepage" },
+  { label: "Help", href: "/helppage" },
 ];
 
 export default function Navbar() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const navigate = useNavigate();
 
   return (
     <nav className="fixed top-0 left-0 right-0 z-50 bg-white/70 backdrop-blur-xl border-b border-white/20 shadow-sm">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
-           <Link to="/" className="flex items-center gap-2 group">
+          <Link to="/" className="flex items-center gap-2 group">
             <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-blue-600 to-sky-400 flex items-center justify-center shadow-lg shadow-blue-500/30 group-hover:shadow-blue-500/50 transition-all duration-300 group-hover:scale-105">
               <Plane className="w-5 h-5 text-white transform -rotate-45" />
             </div>
@@ -58,12 +60,18 @@ export default function Navbar() {
             </button>
 
             {/* Login */}
-            <button className="px-4 py-2 text-sm font-medium text-blue-600 hover:bg-blue-50 rounded-lg transition-all duration-200">
+            <button
+              onClick={() => navigate("/loginpage")}
+              className="px-4 py-2 text-sm font-medium text-blue-600 hover:bg-blue-50 rounded-lg transition-all duration-200"
+            >
               Login
             </button>
 
             {/* Signup */}
-            <button className="px-5 py-2 text-sm font-medium text-white bg-gradient-to-r from-blue-600 to-blue-500 hover:from-blue-700 hover:to-blue-600 rounded-lg shadow-md shadow-blue-500/30 hover:shadow-blue-500/50 transition-all duration-300 hover:-translate-y-0.5">
+            <button
+              onClick={() => navigate("/signuppage")}
+              className="px-5 py-2 text-sm font-medium text-white bg-gradient-to-r from-blue-600 to-blue-500 hover:from-blue-700 hover:to-blue-600 rounded-lg shadow-md shadow-blue-500/30 hover:shadow-blue-500/50 transition-all duration-300 hover:-translate-y-0.5"
+            >
               Sign Up
             </button>
           </div>
@@ -73,7 +81,11 @@ export default function Navbar() {
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
             className="lg:hidden p-2 text-slate-600 hover:text-blue-600 hover:bg-blue-50 rounded-lg transition-all duration-200"
           >
-            {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+            {mobileMenuOpen ? (
+              <X className="w-6 h-6" />
+            ) : (
+              <Menu className="w-6 h-6" />
+            )}
           </button>
         </div>
 
@@ -93,10 +105,16 @@ export default function Navbar() {
               ))}
               <div className="h-px bg-slate-100 my-2" />
               <div className="flex gap-2 px-4">
-                <button className="flex-1 py-2.5 text-sm font-medium text-blue-600 border border-blue-200 hover:bg-blue-50 rounded-lg transition-all duration-200">
+                <button
+                  onClick={() => navigate("/loginpage")}
+                  className="flex-1 py-2.5 text-sm font-medium text-blue-600 border border-blue-200 hover:bg-blue-50 rounded-lg transition-all duration-200"
+                >
                   Login
                 </button>
-                <button className="flex-1 py-2.5 text-sm font-medium text-white bg-gradient-to-r from-blue-600 to-blue-500 rounded-lg shadow-md">
+                <button
+                  onClick={() => navigate("/signuppage")}
+                  className="flex-1 py-2.5 text-sm font-medium text-white bg-gradient-to-r from-blue-600 to-blue-500 rounded-lg shadow-md"
+                >
                   Sign Up
                 </button>
               </div>
